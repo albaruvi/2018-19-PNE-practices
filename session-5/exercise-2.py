@@ -1,7 +1,5 @@
 def count_a(seq):
-    """Counting the number of As in the sequence"""
 
-    # Counter for the As
     counter_as = 0
     counter_ts = 0
     counter_gs = 0
@@ -16,7 +14,7 @@ def count_a(seq):
         if b == 'C':
             counter_cs += 1
     dic = {'As': counter_as, 'Ts': counter_ts, 'Gs': counter_gs, 'Cs': counter_cs}
-    # Return the result
+    # Return the dictionary
     return dic
 
 
