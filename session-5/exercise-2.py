@@ -1,4 +1,4 @@
-def count_a(seq):
+def count_bases(seq):
 
     counter_as = 0
     counter_ts = 0
@@ -25,10 +25,10 @@ sequences = [s1, s2]
 for s in sequences:
 
     print('\nSequence', sequences.index(s)+1, 'information:')
-    na = count_a(s)['As']
-    nt = count_a(s)['Ts']
-    ng = count_a(s)['Gs']
-    nc = count_a(s)['Cs']
+    na = count_bases(s)['As']
+    nt = count_bases(s)['Ts']
+    ng = count_bases(s)['Gs']
+    nc = count_bases(s)['Cs']
 
     # Calculate the total sequence length
     tl = len(s)
