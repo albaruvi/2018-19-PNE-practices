@@ -1,0 +1,31 @@
+Here you will take your notes
+
+Client-server model
+
+The client starts the conversation. It sends a request to the server.
+The server sends back a response to the client.
+
+If there is a server and no clients there's no problem.
+
+The client and the server can be in separate computers or in the same one.
+
+They are connected through the internet. It allows them to communicate with each other. Inside the Internet there are
+isolated computer connected to each other and divided in groups called networks. If we want to send a message from the
+client in one computer to the server in another computer we need an IP address (network interface). If we move to another
+computer a new IP address is created.
+
+My IP address at the university is 10.0.45.201
+The IP address of this computer is 212.128.253.69
+The teacher's IP address is 212.128.253.64
+
+There is a command called Ping that sends a message in order to know if it is connected.
+Ping time to 8.8.8.8: 3.71 ms
+Ping time to this computer: 0.057 ms (57 us)
+Ping time to a computer in the same network: 0.454 ms
+Ping time to my mobile phone: 168 ms
+
+URL (identifying a computer interface for humans)
+Ping www.google.com : IP: (216.58.211.228)
+PING www.urjc.es (212.128.240.50) 56(84) bytes of data.
+
+Port to identify a server inside a computer. To connect to a specific server we need the IP and the port.
