@@ -1,4 +1,4 @@
-# Programming our first client
+# Client for practice 2
 
 import socket
 from P1.Seq import Seq
