@@ -1,8 +1,7 @@
 import socket
-from P1.Seq import Seq
 
 PORT = 8080
-IP = '212.128.253.66'
+IP = '212.128.253.69'
 MAX_OPEN_REQUEST = 5
 
 
