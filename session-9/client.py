@@ -2,7 +2,7 @@ import socket
 
 # SERVER IP, PORT
 PORT = 8080
-IP = '212.128.253.83'
+IP = '212.128.253.69'
 
 # Create the socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -14,7 +14,6 @@ while True:
 
     # Before connecting to the server, ask the user for the string
     msg = input("> ")
-
 
     # Now we can create the socket and connect to the servewr
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,5 +31,3 @@ while True:
     print("Response: {}".format(response))
 
     s.close()
-
-
