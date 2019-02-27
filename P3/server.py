@@ -1,8 +1,7 @@
 import socket
-from P1.Seq import Seq
 
-PORT = 8080
-IP = '212.128.253.66'
+PORT = 8081
+IP = '212.128.253.69'
 MAX_OPEN_REQUEST = 5
 
 
@@ -11,18 +10,37 @@ def process_client(cs):
 
     print('Message from the client: {}'.format(msg))
 
-    s1 = Seq(msg)
-    if 'len' in s1:
-        msg = s1.len()
-    elif 'reverse' in s1:
-        msg = s1.reverse()
+    msg_split = msg.split('\n')
+
+    if msg_split[0] == '':
+        response = str.encode('ALIVE')
+        cs.send(response)
+        cs.close()
+        return
+    elif msg_split[0] != '':
+        for i in msg_split[0].lower():
+            if i != 'a' and i != 't' and i != 'c' and i != 'g':
+                response = 'ERROR'
+                response1 = str.encode(response)
+                cs.send(response1)
+                cs.close()
+                return
+            else:
+                response = str.encode('OK\n')
+                cs.send(response)
+                cs.close()
+                return
+
+    # s1 = Seq(msg)
+    # if 'len' in s1:
+      #   msg = s1.len()
+    # elif 'reverse' in s1:
+       #  msg = s1.reverse()
 
 
     # Sending the message back to the client
     # (because we are an echo server)
-    cs.send(str.encode(msg))
 
-    cs.close()
 
 
 # Create a socket for connecting to the clients+
