@@ -31,11 +31,6 @@ def process_client(cs):
                 cs.close()
                 return
 
-    # s1 = Seq(msg)
-    # if 'len' in s1:
-      #   msg = s1.len()
-    # elif 'reverse' in s1:
-       #  msg = s1.reverse()
 
 
     # Sending the message back to the client
