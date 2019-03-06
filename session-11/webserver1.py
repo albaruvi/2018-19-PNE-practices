@@ -2,8 +2,9 @@ import socket
 import termcolor
 
 # Change this IP to yours!!!!!
-IP = "212.128.253.72"
+IP = "212.128.253.69"
 PORT = 8082
+
 MAX_OPEN_REQUESTS = 5
 
 
@@ -26,7 +27,7 @@ def process_client(cs):
         <meta charset="utf-8">
         <title>Green server</title>
       </head>
-      <body style="background-color: plum;">
+      <body style="background-color: green;">
         <h1>GREEN SERVER</h1>
         <p>I am the Green Server! :-)</p>
       </body>
