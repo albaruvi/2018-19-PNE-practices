@@ -2,7 +2,7 @@ import socket
 
 # SERVER IP, PORT
 PORT = 8081
-IP = '212.128.253.69'
+IP = '192.168.1.68'
 
 # Create the socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -11,7 +11,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((IP, PORT))
 
 # Before connecting to the server, ask the user for the string
-msg = """atgc"""
+msg = input('>')
 
 # Now we can create the socket and connect to the servewr
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
