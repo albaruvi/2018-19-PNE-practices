@@ -1,14 +1,12 @@
+import socket
 import termcolor
 
-# Change this IP to yours!!!!!
 IP = "212.128.253.72"
-PORT = 8082
-
+PORT = 8080
 MAX_OPEN_REQUESTS = 5
 
 
-def process_
-    ):
+def process_client(cs):
     """Process the client request.
     Parameters:  cs: socket for communicating with the client"""
 
@@ -20,28 +18,39 @@ def process_
     print("Request message: ")
     termcolor.cprint(msg, 'green')
 
-    content = """
+    # Build the HTTP response message. It has the following lines
+    # Status line
+    # header
+    # blank line
+    # Body (content to send)
+
+    # This new contents are written in HTML language
+    contents = """
     <!DOCTYPE html>
     <html lang="en" dir="ltr">
       <head>
         <meta charset="utf-8">
         <title>Green server</title>
       </head>
-      <body style="background-color: plum;">
+      <body style="background-color: lightgreen;">
         <h1>GREEN SERVER</h1>
         <p>I am the Green Server! :-)</p>
+        <a href="blue.html">[Blue page]</a>
+        <a href="pink.html">[Pink page]</a>
       </body>
     </html>
     """
 
-    status_line = 'HTTP/1.1 200 ok\r\n'
+    # -- Everything is OK
+    status_line = "HTTP/1.1 200 OK\r\n"
 
-    header = 'Content-Type: text/html\r\n'
-    header += 'Content-Length: {}\r\nº'.format(len(str.encode(content)))
+    # -- Build the header
+    header = "Content-Type: text/html\r\n"
+    header += "Content-Length: {}\r\n".format(len(str.encode(contents)))
 
-    response_msg = status_line + header + '\r\n' + content
-
-    cs.send(str.encode(response_msg))
+    # -- Build the message by joining together all the parts
+    response_msg = str.encode(status_line + header + "\r\n" + contents)
+    cs.send(response_msg)
 
     # Close the socket
     cs.close()
