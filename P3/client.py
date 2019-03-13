@@ -10,10 +10,11 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # establish the connection to the Server (IP, PORT)
 s.connect((IP, PORT))
 
-# Before connecting to the server, ask the user for the string
-msg = input('>')
+# Before connecting to the server enter the string
+msg = """
+"""
 
-# Now we can create the socket and connect to the servewr
+# Now we can create the socket and connect to the server
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # establish the connection to the Server (IP, PORT)
