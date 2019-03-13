@@ -45,7 +45,7 @@ class Seq:
         return nb
 
     def perc_bases(self):
-        from Bases import count_bases
+        from Bases import count_bases  # Importing function count_bases from session 5 for counting the bases
         na = count_bases(self.strbases)['As']
         nt = count_bases(self.strbases)['Ts']
         ng = count_bases(self.strbases)['Gs']

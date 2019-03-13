@@ -1,8 +1,7 @@
 import socket
 import termcolor
 
-# Change this IP to yours!!!!!
-IP = "212.128.253.69"
+IP = "192.168.1.68"
 PORT = 8082
 
 MAX_OPEN_REQUESTS = 5
@@ -33,7 +32,8 @@ def process_client(cs):
       </body>
     </html>
     """
-
+    
+    # Everything is ok
     status_line = 'HTTP/1.1 200 ok\r\n'
 
     header = 'Content-Type: text/html\r\n'
