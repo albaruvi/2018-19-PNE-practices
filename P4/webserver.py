@@ -1,14 +1,12 @@
 import socket
 import termcolor
 
-IP = "212.128.253.72"
+IP = "10.0.44.6"
 PORT = 8080
 MAX_OPEN_REQUESTS = 5
 
 
 def process_client(cs):
-    """Process the client request.
-    Parameters:  cs: socket for communicating with the client"""
 
     # Read client message. Decode it as a string
     msg = cs.recv(2048).decode("utf-8")
@@ -18,29 +16,23 @@ def process_client(cs):
     print("Request message: ")
     termcolor.cprint(msg, 'green')
 
-    # Build the HTTP response message. It has the following lines
-    # Status line
-    # header
-    # blank line
-    # Body (content to send)
-
     # This new contents are written in HTML language
-    contents = """
-    <!DOCTYPE html>
-    <html lang="en" dir="ltr">
-      <head>
-        <meta charset="utf-8">
-        <title>Green server</title>
-      </head>
-      <body style="background-color: lightgreen;">
-        <h1>GREEN SERVER</h1>
-        <p>I am the Green Server! :-)</p>
-        <a href="blue.html">[Blue page]</a>
-        <a href="pink.html">[Pink page]</a>
-      </body>
-    </html>
-    """
 
+    msg_split = msg.split(' ')
+
+
+    if msg_split[1] == '/pink':
+        filename = open('pink.html', 'r')
+        contents = filename.read()
+    elif msg_split[1] == '/blue':
+        filename = open('blue.html', 'r')
+        contents = filename.read()
+    elif msg_split[1] == '/' or msg_split[1] == 'index':
+        filename = open('index.html', 'r')
+        contents = filename.read()
+    else:
+        filename = open('error.html', 'r')
+        contents = filename.read()
     # -- Everything is OK
     status_line = "HTTP/1.1 200 OK\r\n"
 
