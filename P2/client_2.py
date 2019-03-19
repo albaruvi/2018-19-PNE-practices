@@ -8,7 +8,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 print('Socket created')
 PORT = 8080
-IP = '212.128.253.66'
+IP = '212.128.253.72'
 
 while True:
     sequence = Seq(input('Introduce a sequence:  '))
