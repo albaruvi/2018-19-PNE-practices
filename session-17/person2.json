@@ -3,7 +3,7 @@
     "Lastname": "RGojca",
     "age": 20,
     "phoneNumber":  [
-      {"number": "1111-1111", "type": "home"},
-      {"number": "2222-2222", "type" : "mobile"}
+      {"number": "1111-1511", "type": "home"},
+      {"number": "2722-2222", "type" : "mobile"}
     ]
 }
