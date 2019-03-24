@@ -1,7 +1,7 @@
 import socket
 import termcolor
 
-IP = "10.0.44.6"
+IP = "192.168.1.68"
 PORT = 8080
 MAX_OPEN_REQUESTS = 5
 
@@ -27,7 +27,7 @@ def process_client(cs):
     elif msg_split[1] == '/blue':
         filename = open('blue.html', 'r')
         contents = filename.read()
-    elif msg_split[1] == '/' or msg_split[1] == 'index':
+    elif msg_split[1] == '/' or msg_split[1] == '/index':
         filename = open('index.html', 'r')
         contents = filename.read()
     else:
