@@ -16,10 +16,7 @@ def process_client(cs):
     print("Request message: ")
     termcolor.cprint(msg, 'green')
 
-    # This new contents are written in HTML language
-
     msg_split = msg.split(' ')
-
 
     if msg_split[1] == '/pink':
         filename = open('pink.html', 'r')
