@@ -28,7 +28,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             filename = open('blue.html', 'r')
             contents = filename.read()
         elif msg_split[1] == '/' or msg_split[1] == '/index':
-            filename = open('index.html', 'r')
+            filename = open('index-exercise-1.html', 'r')
             contents = filename.read()
         else:
             filename = open('error.html', 'r')
