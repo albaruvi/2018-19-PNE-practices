@@ -1,70 +1,72 @@
-import socket
+import http.server
+import socketserver
 import termcolor
 
-IP = "192.168.1.68"
-PORT = 8080
-MAX_OPEN_REQUESTS = 5
-
-def process_client(cs):
-    # Read client message. Decode it as a string
-    msg = cs.recv(2048).decode("utf-8")
-
-    # Print the received message, for debugging
-    print()
-    print("Request message: ")
-    termcolor.cprint(msg, 'green')
-
-    msg_split = msg.split(' ')
-
-    if msg_split[1] == '/pink':
-        filename = open('pink.html', 'r')
-        contents = filename.read()
-    elif msg_split[1] == '/blue':
-        filename = open('blue.html', 'r')
-        contents = filename.read()
-    elif msg_split[1] == '/' or msg_split[1] == '/index':
-        filename = open('index.html', 'r')
-        contents = filename.read()
-    else:
-        filename = open('error.html', 'r')
-        contents = filename.read()
-    # -- Everything is OK
-    status_line = "HTTP/1.1 200 OK\r\n"
-
-    # -- Build the header
-    header = "Content-Type: text/html\r\n"
-    header += "Content-Length: {}\r\n".format(len(str.encode(contents)))
-
-    # -- Build the message by joining together all the parts
-    response_msg = str.encode(status_line + header + "\r\n" + contents)
-    cs.send(response_msg)
-
-    # Close the socket
-    cs.close()
+PORT = 8001
 
 
-# MAIN PROGRAM
+class TestHandler(http.server.BaseHTTPRequestHandler):
 
-# create an INET, STREAMing socket
-serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    def do_GET(self):
 
-# Bind the socket to the IP and PORT
-serversocket.bind((IP, PORT))
+        # Print the request line
+        termcolor.cprint(self.requestline, 'green')
 
-# Configure the server sockets
-# MAX_OPEN_REQUESTS connect requests before refusing outside connections
-serversocket.listen(MAX_OPEN_REQUESTS)
+        msg = self.requestline
 
-print("Socket ready: {}".format(serversocket))
+        # Print the received message, for debugging
+        print()
+        print("Request message: ")
+        termcolor.cprint(msg, 'green')
 
-while True:
-    # accept connections from outside
-    # The server is waiting for connections
-    print("Waiting for connections at {}, {} ".format(IP, PORT))
-    (clientsocket, address) = serversocket.accept()
+        msg_split = msg.split(' ')
 
-    # Connection received. A new socket is returned for communicating with the client
-    print("Attending connections from client: {}".format(address))
+        if msg_split[1] == '/pink':
+            filename = open('pink.html', 'r')
+            contents = filename.read()
+        elif msg_split[1] == '/blue':
+            filename = open('blue.html', 'r')
+            contents = filename.read()
+        elif msg_split[1] == '/' or msg_split[1] == '/index':
+            filename = open('index.html', 'r')
+            contents = filename.read()
+        else:
+            filename = open('error.html', 'r')
+            contents = filename.read()
 
-    # Service the client
-    process_client(clientsocket)
+        self.send_response(200)  # -- Status line: OK!
+
+        # Define the content-type header:
+        self.send_header("Content-Type", "text/html\r\n")
+
+        # The header is finished
+        self.end_headers()
+
+        # Send the response message
+        self.wfile.write(str.encode(contents))
+
+        return
+
+
+# ------------------------
+# - Server MAIN program
+# ------------------------
+# -- Set the new handler
+Handler = TestHandler
+
+# -- Open the socket server
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+
+    print("Serving at PORT", PORT)
+
+    # -- Main loop: Attend the client. Whenever there is a new
+    # -- clint, the handler is called
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("")
+        print("Stoped by the user")
+        httpd.server_close()
+
+print("")
+print("Server Stopped")
