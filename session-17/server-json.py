@@ -22,7 +22,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         resource = list_resource[0]
 
         if resource == "/":
-            f = open("index.html", 'r')
+            f = open("index-exercise-1.html", 'r')
             code = 200
             # Read the file
             contents = f.read()
