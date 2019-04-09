@@ -32,10 +32,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         return
 
 
-# ------------------------
-# - Server MAIN program
-# ------------------------
-# -- Set the new handler
+
 Handler = TestHandler
 
 # -- Open the socket server
