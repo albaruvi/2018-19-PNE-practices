@@ -18,10 +18,27 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if msg_split[1] == ' ':
             filename = open('main-page.html', 'r')
             contents = filename.read()
-        if msg_split[1] == '/' or msg_split[1] == '/echo':
-            filename = open('main-page.html', 'r')
-            filename = open('response.html', 'r')
-            contents = filename.read()
+        elif msg_split[1] == '/' or msg_split[1] == '/echo':
+            content = """
+                <!DOCTYPE html>
+                <html lang="en" dir="ltr">
+                  <head>
+                    <meta charset="utf-8">
+                    <title>Green server</title>
+                  </head>
+                  <body style="background-color: green;">
+                    <h1>GREEN SERVER</h1>
+                    <p>I am the Green Server! :-)</p>
+                  </body>
+                </html>
+                """
+
+            status_line = 'HTTP/1.1 200 ok\r\n'
+
+            header = 'Content-Type: text/html\r\n'
+            header += 'Content-Length: {}\r\nº'.format(len(str.encode(content)))
+
+            contents = status_line + header + '\r\n' + content
         else:
             filename = open('error.html', 'r')
             contents = filename.read()
