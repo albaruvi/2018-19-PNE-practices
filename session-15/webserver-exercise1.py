@@ -5,6 +5,7 @@ import termcolor
 # Define the Server's port
 PORT = 8002
 
+
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -15,13 +16,30 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         msg = self.requestline
 
         msg_split = msg.split(' ')
-        if msg_split[1] == ' ':
+        if msg_split[1].startswith('/main') or msg_split[1] == '/':
             filename = open('main-page.html', 'r')
             contents = filename.read()
-        if msg_split[1] == '/' or msg_split[1] == '/echo':
-            filename = open('main-page.html', 'r')
-            filename = open('response.html', 'r')
-            contents = filename.read()
+        elif msg_split[1].startswith('/echo'):
+            msg_split2 = msg_split[1].split('=')
+            contents = """
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <title>MSG</title>
+                        </head>
+                        <body>
+                            <h1>Eco of the message received</h1>
+                            <p> """
+            contents += msg_split2[1]
+
+            contents += """</p>
+                            <a href="main-page">MAIN page</a>
+                        
+                        </body>
+                        </html>
+                        """
+
         else:
             filename = open('error.html', 'r')
             contents = filename.read()
