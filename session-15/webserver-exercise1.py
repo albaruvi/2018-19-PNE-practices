@@ -13,14 +13,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # Print the request line
         termcolor.cprint(self.requestline, 'green')
 
-        msg = self.requestline
-
-        msg_split = msg.split(' ')
-        if msg_split[1].startswith('/main') or msg_split[1] == '/':
+        if self.path.startswith('/main') or self.path == '/':
             filename = open('main-page.html', 'r')
             contents = filename.read()
-        elif msg_split[1].startswith('/echo'):
-            msg_split2 = msg_split[1].split('=')
+        elif self.path.startswith('/echo'):
+            msg_split = self.path.split('=')
             contents = """
                         <!DOCTYPE html>
                         <html lang="en">
@@ -31,7 +28,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         <body>
                             <h1>Eco of the message received</h1>
                             <p> """
-            contents += msg_split2[1]
+            contents += msg_split[1]
 
             contents += """</p>
                             <a href="main-page">MAIN page</a>
