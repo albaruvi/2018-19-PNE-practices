@@ -13,18 +13,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # Print the request line
         termcolor.cprint(self.requestline, 'green')
 
-        msg = self.requestline
-
-        msg_split = msg.split(' ')
-        if msg_split[1].startswith('/main') or msg_split[1] == '/':
+        if self.path.startswith('/main') or self.path == '/':
             filename = open('main-page.html', 'r')
             contents = filename.read()
-        elif msg_split[1].startswith('/seq'):
-            msg_split2 = msg_split[1].split('=')
-            msg_split3 = []
-            for i in msg_split2:
-                msg_split3 += i.split('&')
-            for i in msg_split3[1].lower():
+        elif self.path.startswith('/seq'):
+            msg_split = self.path.split('=')
+            msg_split2 = []
+            for i in msg_split:
+                msg_split2 += i.split('&')
+            for i in msg_split2[1].lower():
                 if i != 'a' and i != 't' and i != 'c' and i != 'g':
                     result = 'no'
                 else:
@@ -43,20 +40,20 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         <body>
                             <h1>Echoing the message received</h1>
                             <p> """
-                contents += 'The sequence we are working with is: ' + msg_split3[1] + '<p>' + '\n' + '<p>'
-                sequence = Seq(msg_split3[1])
-                if 'on' in msg_split3:
+                contents += 'The sequence we are working with is: ' + msg_split2[1] + '<p>' + '\n' + '<p>'
+                sequence = Seq(msg_split2[1])
+                if 'on' in msg_split2:
                     l1 = sequence.len()
                     contents += 'Length of the sequence = ' + str(l1) + '<p>' + '\n' + '<p>'
-                if 'count' in msg_split3:
+                if 'count' in msg_split2:
                     # Count the number of the base selected in the sequence
-                    base = msg_split2[-1]
+                    base = msg_split[-1]
                     count_bases = sequence.count_base()
                     base_requested = count_bases[base+'s']
                     contents += 'Number of ' + base + 's found = ' + str(base_requested) + '<p>' + '\n' + '<p>'
-                if 'perc' in msg_split3:
+                if 'perc' in msg_split2:
                     # Calculates the percentage of the base selected in the sequence
-                    base = msg_split2[-1]
+                    base = msg_split[-1]
                     percentages = sequence.perc_bases()
                     base_requested = percentages[base+'s']
                     contents += 'Percentage of ' + base + 's = ' + str(base_requested) + '<p>' + '\n' + '<p>'
