@@ -23,7 +23,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         elif self.path == '/blue':
             filename = open('blue.html', 'r')
             contents = filename.read()
-        elif self.path == '/' or msg_split[1] == '/index':
+        elif self.path == '/' or self.path == '/index':
             filename = open('index.html', 'r')
             contents = filename.read()
         else:
