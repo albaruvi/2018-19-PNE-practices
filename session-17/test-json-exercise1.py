@@ -2,24 +2,18 @@ import json
 import termcolor
 
 
-f1 = open("person.json", 'r')
-f2 = open("person2.json", 'r')
-f3 = open("person3.json", 'r')
+f1 = open("person-exercise1.json", 'r')
 
-person1 = json.load(f1)
-person2 = json.load(f2)
-person3 = json.load(f3)
+person = json.load(f1)
 
-list_people = [person1, person2, person3]
-
-for person in list_people:
+for n in [1, 2, 3]:
     print()
     termcolor.cprint("Name: ", 'green', end="")
-    print(person['Firstname'], person['Lastname'])
+    print(person['Firstname'][n-1], person['Lastname'][n-1])
     termcolor.cprint("Age: ", 'green', end="")
-    print(person['age'])
+    print(person['age'][n-1])
 
-    phoneNumbers = person['phoneNumber']
+    phoneNumbers = person['phoneNumber'][n-1]
 
     termcolor.cprint("Phone numbers: ", 'green', end='')
     print(len(phoneNumbers))
