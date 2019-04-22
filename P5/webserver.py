@@ -12,22 +12,18 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # Print the request line
         termcolor.cprint(self.requestline, 'green')
 
-        msg = self.requestline
-
         # Print the received message, for debugging
         print()
         print("Request message: ")
-        termcolor.cprint(msg, 'green')
+        termcolor.cprint(self.requestline, 'green')
 
-        msg_split = msg.split(' ')
-
-        if msg_split[1] == '/pink':
+        if self.path == '/pink':
             filename = open('pink.html', 'r')
             contents = filename.read()
-        elif msg_split[1] == '/blue':
+        elif self.path == '/blue':
             filename = open('blue.html', 'r')
             contents = filename.read()
-        elif msg_split[1] == '/' or msg_split[1] == '/index':
+        elif self.path == '/' or msg_split[1] == '/index':
             filename = open('index.html', 'r')
             contents = filename.read()
         else:
