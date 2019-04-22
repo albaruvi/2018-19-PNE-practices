@@ -12,7 +12,7 @@ def process_client(cs):
 
     print('Message from the client: {}'.format(msg))
 
-    msg_split = msg.split('\\n')
+    msg_split = msg.split('\n')
     print(msg_split)
 
     if msg_split[0] == '':  # First line empty
