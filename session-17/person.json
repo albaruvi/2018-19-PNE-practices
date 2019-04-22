@@ -2,7 +2,7 @@
     "Firstname": "Troll",
     "Lastname": "Face",
     "age": 20,
-    "phoneNumber":  [
+    "phoneNumber": [
       {"number": "1111-1111", "type": "home"},
       {"number": "2222-2222", "type" : "mobile"}
     ]
