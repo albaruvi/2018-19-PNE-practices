@@ -4,12 +4,6 @@ import socket
 PORT = 8081
 IP = '192.168.1.68'
 
-# Create the socket
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# establish the connection to the Server (IP, PORT)
-s.connect((IP, PORT))
-
 # Before connecting to the server enter the string
 msg = """
 """
